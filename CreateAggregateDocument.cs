@@ -10,7 +10,7 @@ namespace Farrellsoft.Examples
 {
     public static class CreateAggregateDocument
     {
-        //[FunctionName("CreateAggregateDocument")]
+        [FunctionName("CreateAggregateDocument")]
         public static IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
             [CosmosDB(databaseName: "namesdata", collectionName: "firstletters",
