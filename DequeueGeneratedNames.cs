@@ -10,7 +10,7 @@ namespace Farrellsoft.Examples
 {
     public static class DequeueGeneratedNames
     {
-        [FunctionName("DequeueGeneratedNames")]
+        //[FunctionName("DequeueGeneratedNames")]
         [return: Blob("raw-names/{id}.txt", FileAccess.Write, Connection = "AzureWebJobsStorage")]
         public static string Run(
             [QueueTrigger("names-queue", Connection = "AzureWebJobsStorage")]string myQueueItem,
