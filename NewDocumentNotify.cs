@@ -15,7 +15,7 @@ namespace Farrellsoft.Examples
     {
         [FunctionName("NewDocumentNotify")]
         public static async Task Run(
-            [CosmosDBTrigger(databaseName: "namesdata", collectionName: "firstletters",
+            [CosmosDBTrigger(databaseName: "namesdata", collectionName: "firstletterstrend",
                 ConnectionStringSetting = "CosmosDbConnection",
                 CreateLeaseCollectionIfNotExists = true)]IReadOnlyList<Document> newDocuments,
             [SignalR(HubName = "FirstNameLetterTrend")]IAsyncCollector<SignalRMessage> signalRMessage,
