@@ -8,6 +8,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Extensions.SignalRService;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace Farrellsoft.Examples
 {
@@ -25,7 +26,10 @@ namespace Farrellsoft.Examples
             await signalRMessage.AddAsync(new SignalRMessage
                 {
                     Target = "newFirstLetterData",
-                    Arguments = newDocuments.ToArray()
+                    Arguments = newDocuments
+                        .Select(doc => JsonConvert.DeserializeObject<AggregateLetterCountDocument>(doc.ToString()))
+                        .ToArray()
+
                 });
         }
 
@@ -36,5 +40,21 @@ namespace Farrellsoft.Examples
         {
             return connectionInfo;
         }
+    }
+
+    class AggregateLetterCountDocument
+    {
+        public Guid Id { get; set; }
+
+        [JsonProperty("timestamp")]
+        public DateTime TimestampUtc { get; set; }
+
+        public IList<LetterCountEventData> EventData { get; set; }
+    }
+
+    class LetterCountEventData
+    {
+        public string Letter { get; set; }
+        public int LetterCount { get; set; }
     }
 }
