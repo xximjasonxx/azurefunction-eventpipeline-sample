@@ -32,7 +32,7 @@ namespace Farrellsoft.Examples
         [FunctionName("negotiate")]
         public static SignalRConnectionInfo GetSignalRInfo(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequest req,
-            [SignalRConnectionInfo(HubName = "FirstNameLetter")] SignalRConnectionInfo connectionInfo)
+            [SignalRConnectionInfo(HubName = "FirstNameLetterTrend")] SignalRConnectionInfo connectionInfo)
         {
             return connectionInfo;
         }
