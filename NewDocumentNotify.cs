@@ -18,7 +18,7 @@ namespace Farrellsoft.Examples
             [CosmosDBTrigger(databaseName: "namesdata", collectionName: "firstletters",
                 ConnectionStringSetting = "CosmosDbConnection",
                 CreateLeaseCollectionIfNotExists = true)]IReadOnlyList<Document> newDocuments,
-            [SignalR(HubName = "FirstNameLetter")]IAsyncCollector<SignalRMessage> signalRMessage,
+            [SignalR(HubName = "FirstNameLetterTrend")]IAsyncCollector<SignalRMessage> signalRMessage,
             ILogger log)
         {
             log.LogInformation($"Sending {newDocuments.Count} documents");
