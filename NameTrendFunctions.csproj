@@ -9,7 +9,7 @@
     <PackageReference Include="Microsoft.Azure.DurableTask.Core" Version="2.2.4"/>
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage" Version="3.0.11"/>
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.EventHubs" Version="4.1.1"/>
-    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.ServiceBus" Version="4.1.0"/>
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.ServiceBus" Version="4.1.1"/>
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.CosmosDB" Version="3.0.5"/>
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.SignalRService" Version="1.1.0"/>
   </ItemGroup>

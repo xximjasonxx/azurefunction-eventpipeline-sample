@@ -13,7 +13,8 @@ namespace Farrellsoft.Examples
     public static class GenerateNamesFunctions
     {
         [FunctionName("GenerateNamesTimerFunction")]
-        [return: Queue("names-queue", Connection = "AzureWebJobsStorage")]
+        //[return: Queue("names-queue", Connection = "AzureWebJobsStorage")]
+        [return: ServiceBus("newnames-queue", Connection = "ServiceBusQueueConnection")]
         public static async Task<string> RunTrigger(
             [TimerTrigger("*/3 * * * * *")]TimerInfo myTimer,
             ILogger log
