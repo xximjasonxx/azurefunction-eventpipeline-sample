@@ -14,7 +14,7 @@ namespace Farrellsoft.Examples
     {
         [FunctionName("GenerateNamesTimerFunction")]
         //[return: Queue("names-queue", Connection = "AzureWebJobsStorage")]
-        [return: ServiceBus("newnames-queue", Connection = "ServiceBusQueueConnection")]
+        [return: ServiceBus("newnames-queue", Connection = "ServiceBusConnection")]
         public static async Task<string> RunTrigger(
             [TimerTrigger("*/3 * * * * *")]TimerInfo myTimer,
             ILogger log
@@ -32,6 +32,7 @@ namespace Farrellsoft.Examples
                 )))
             )).ToString();
 
+            //log.LogInformation(output);
             return output;
         }
 
