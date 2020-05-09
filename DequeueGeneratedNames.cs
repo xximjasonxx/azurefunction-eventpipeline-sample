@@ -14,20 +14,10 @@ namespace Farrellsoft.Examples
     {
         [FunctionName("DequeueGeneratedNames")]
         [return: Blob("raw-names/{id}.txt", FileAccess.Write, Connection = "AzureWebJobsStorage")]
-        public static async Task<string> Run(
-            //[QueueTrigger("names-queue", Connection = "AzureWebJobsStorage")]string myQueueItem,
+        public static string Run(
             [ServiceBusTrigger("newnames-queue", Connection = "ServiceBusConnection")]NamesGenerationRecord msg,
-            [EventHub("names", Connection = "EventHubSendConnection")]IAsyncCollector<string> outputEvents,
             ILogger log)
-        {
-            //log.LogTrace($"Dequeued {myQueueItem} from Queue");
-
-            foreach (var nameRecord in msg.GeneratedNames)
-            {
-                //log.LogTrace($"Hello {obj["name"].Value<string>()}");
-                await outputEvents.AddAsync(nameRecord.ToString());
-            }
-            
+        {            
             return msg.ToString();
         }
     }

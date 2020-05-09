@@ -13,27 +13,25 @@ namespace Farrellsoft.Examples
     public static class GenerateNamesFunctions
     {
         [FunctionName("GenerateNamesTimerFunction")]
-        //[return: Queue("names-queue", Connection = "AzureWebJobsStorage")]
         [return: ServiceBus("newnames-queue", Connection = "ServiceBusConnection")]
         public static async Task<string> RunTrigger(
             [TimerTrigger("*/3 * * * * *")]TimerInfo myTimer,
+            [EventHub("names", Connection = "EventHubSendConnection")] IAsyncCollector<string> outputEvents,
             ILogger log
         )
         {
-            //log.LogInformation("GeneratedNames starting");
-
             var names = await GetNames();
-            //log.LogTrace($"Generated {names.Count} names");
+            foreach (var nameRecord in names)
+            {
+                await outputEvents.AddAsync(nameRecord.ToString());
+            }
 
-            var output = (new JObject(
+            return (new JObject(
                 new JProperty("id", Guid.NewGuid().ToString()),
                 new JProperty("data", names.Select(name => new JObject(
                     new JProperty("name", name)
                 )))
             )).ToString();
-
-            //log.LogInformation(output);
-            return output;
         }
 
         static async Task<IList<string>> GetNames()
